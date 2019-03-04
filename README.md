@@ -49,7 +49,7 @@
  ```C
  int * i = (int*) malloc (sizeof(int));
  ```
- ![](https://github.com/juheesvt/data-structure-study/blob/master/malloc.PNG)
+ ![](https://github.com/juheesvt/data-structure/blob/master/malloc.PNG)
  
  위와 같이 i라는 포인터 변수를 선언하고 i 값에 다가 메모리를 할당하는 것 !
  만약 malloc(sizeof(int)) 는 그대로 하고 앞에 int* 를 short 형으로 바꾼다면  
@@ -75,7 +75,7 @@
  
  이해가 어렵다면 다음 그림과 _간접 주소 지정 방식_ 을 참고해보면 좋다.
  
- ![memory leak 이해를 위한 이미지](https://github.com/juheesvt/data-structure-study/blob/master/memory%20leak.png)
+ ![memory leak 이해를 위한 이미지](https://github.com/juheesvt/data-structure/blob/master/memory%20leak.png)
  
  
  4. **헤더 파일** 
