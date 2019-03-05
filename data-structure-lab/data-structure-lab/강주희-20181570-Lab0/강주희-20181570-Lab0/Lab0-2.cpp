@@ -11,12 +11,20 @@ int main() {
 	ifstream in("Lab0-2.dat");
 	string line;
 	int idx = 0;
-	int sum;
+	int sum=0;
+	
 
 	while (getline(in, line)) {
+
+		int word_num = 0;
 		cout << line << endl;
-		cout << "The number of words : " <<line.length() << endl;
-		sum += line.length();
+
+		for (int i = 0; i < line.length(); ++i) {
+			if (line[i] == ' ')
+				word_num += 1;
+		}
+		cout << "The number of words : " << word_num << endl;
+		sum += word_num;
 		
 	}
 
