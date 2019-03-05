@@ -152,6 +152,21 @@
  // 지시자는 명령어가 아니라서 세미콜론으로 끝나지 않음 !
  ```
  
+ ###### 대체 텍스트가 있는 객체와 유사한 매크로 ( Object-like macros with subtitution text )
+ 
+ 전처리기가 이 지시자를 발견하면 **identifier**은 앞으로 **substitution_text** 텍스트로 대체된다.  
+ 식별자(identifier)는 일반적으로 공백을 나타내는 밑줄을 사용하여 대문자로 모두 입력한다.  
+ 
+ ```C
+ #define MY_FAVORITE_NUMBER 9
+ 
+ std::cout<<"My favorite number is:"<<MY_FAVORITE_NUMBER<<std::endl;
+ ```
+ 전처리기(preprocessed)는 위 코드를 다음과 같이 치환한다.
+ ```c
+ std::cout<<"My favorite number is:"<<9<<std::endl;
+ ```
+ 
  
  
  
