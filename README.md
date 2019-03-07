@@ -167,6 +167,14 @@
  std::cout<<"My favorite number is:"<<9<<std::endl;
  ```
  
+ ###### 대체 텍스트가 없는 객체와 유사한 매크로 (Object-like macros without substitution test )
+ 
+ 객체와 유사한 매크로는 대체 텍스트 없이도 정의할 수 있음.
+ 
+ ```c
+ #define USE_YEN
+ ``
+ 일반적으로 이 전처리 지시자는 조건부 컴파일(conditional compilation)을 하기위해 사용된다.
  
  
  
