@@ -1,4 +1,4 @@
- ## C로 자료구조 공부하기 전에 알아야 할 것들 
+ # C로 자료구조 공부하기 전에 알아야 할 것들 
 > - 구조체 정의 및 구조체 대상의 typedef 선언
 > - malloc 함수와 free 함수 사용과 이 함수들이 메모리 동적할당과 관련된 것 이라는 것
 > - 헤더 파일이 필요한 이유
@@ -8,7 +8,7 @@
 > - 재귀함수의 동작방식  
  
  
- 1. 구조체 정의 및 구조체 대상의 typedef 선언
+#### 구조체 정의 및 구조체 대상의 typedef 선언
  ```c
  typedef int Pair[2];
    Pair point = { 3,4 };
@@ -23,8 +23,7 @@
    }
 };
  ```
- 
- 2. 동적할당과 malloc 함수
+#### 동적할당과 malloc 함수
  C언어에서는 메모리 할당 방식에 2가지 종류가 있다 
  - 정적 할당 : 프로그램 실행 전 _변수의 저장공간을 먼저 할당_ 후 프로그램 종료시 해제
  Ex) int a[10] = 0;
@@ -126,7 +125,7 @@
  #endif
  ```
  
- ##### 전처리기 (preprocesser)
+ #### 전처리기 (preprocesser)
  전처리기는 프로그램을 컴파일할 때 컴파일 직전에 실행되는 별도의 프로그램  
  전처리기가 실행되면 각 코드 파일에서 지시자(directives)를 찾음  
  지시자(directives)는 #으로 시작해서 줄바꿈으로 끝나는 코드 !
@@ -173,8 +172,36 @@
  
  ```c
  #define USE_YEN
- ``
+ ```
  일반적으로 이 전처리 지시자는 조건부 컴파일(conditional compilation)을 하기위해 사용된다.
  
+ ##### 조건부 컴파일 ( Conditional compilation )
+ 조건부 컴파일 전처리 지시자를 사용하면 컴파일할 조건이나 컴파일하지 않을 조건을 지정할 수 있음
  
+ `#ifdef` 지시자를 사용하면, 전처리기가 이전에 `#`이 정의되었는지 아닌지를 확인한다.  
+ 정의되었다면 `#ifdef`와 해당 `#endif` 사이의 코드가 컴파일된다.  
+ 그렇지 않으면 코드가 무시된다.
+ 
+ ```c
+ #define LOVE_SVT
+ 
+ #ifdef LOVE_SVT
+ std::cout << "hoshi" << std::endl;
+ #endif
+ 
+ #ifdef WOW
+ std::cout << "wow!" << std::endl;
+ #endif
+ ```
+ `WOW`가 정의되지 않아서 `std::cout << "wow!" << std::endl;` 이 무시된다.  
+ 
+ `#ifndef` 는 `#ifdef`의 반대다.  
+ identifier가 아직 정의되지 않았는지 확인한다 !  
+ ```c
+ #ifndef PRINT_BOB 
+ std::cout << "Bob" << std::endl; 
+ #endif
+ ```
+
+출처: https://boycoding.tistory.com/145?category=1006674 [소년코딩]
  
