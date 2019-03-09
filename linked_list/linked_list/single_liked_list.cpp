@@ -9,10 +9,9 @@ SingleLinkedList::SingleLinkedList() {
 }
 
 bool SingleLinkedList::isEmpty() {
-	if (head == NULL) {
-		cout << "Empty !!" << endl;
+	if (head == NULL) 
 		return true;
-	}
+	
 	return false;
 }
 
@@ -90,7 +89,7 @@ int SingleLinkedList::size() {
 }
 
 void SingleLinkedList::display() {
-	if( ! tail )
+	if( isEmpty() )
 		cout << "SingleLinkedList is Empty !!" << endl;
 	else {
 		Node * temp = head;
@@ -122,22 +121,26 @@ int SingleLinkedList::search(int data) {
 
 SingleLinkedList::~SingleLinkedList() {
 
-	Node * del_node = head;
-	Node * next_del_node = head->getNext();
+	if (!isEmpty()) {
 
-	for (int i = 0; ; ++i) {
 
-		if (next_del_node->getNext() == NULL) {
-			delete del_node;
-			delete next_del_node;
-			break;
-		}
+		Node * del_node = head;
+		Node * next_del_node = head->getNext();
 
-		else {
-			delete del_node;
-			del_node = next_del_node;
-			next_del_node = next_del_node->getNext();
-			
+		for (int i = 0; ; ++i) {
+
+			if (next_del_node->getNext() == NULL) {
+				delete del_node;
+				delete next_del_node;
+				break;
+			}
+
+			else {
+				delete del_node;
+				del_node = next_del_node;
+				next_del_node = next_del_node->getNext();
+
+			}
 		}
 	}
 }

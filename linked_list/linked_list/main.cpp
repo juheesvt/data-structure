@@ -4,8 +4,9 @@
 
 int main() {
 	SingleLinkedList sll;
-	
-	sll.isEmpty();
+	if (sll.isEmpty())
+		cout << "Empty !" << endl;
+
 	sll.insert(10);
 	sll.display();
 	sll.insert(5);
