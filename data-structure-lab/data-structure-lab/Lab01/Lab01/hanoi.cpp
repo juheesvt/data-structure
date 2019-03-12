@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int recursiveHanoi(int num, int start, int end, int assistant);
+void recursiveHanoi(int num, int from, int to, int y);
 
 int main() {
 
@@ -10,13 +10,14 @@ int main() {
 
 }
 
-int recursiveHanoi(int num, int start, int end, int assistant) {
+void recursiveHanoi(int num, int from, int to, int by) {
 
 	if (num == 1) {
-		cout << start << "->" << end << endl;
-		return 1;
+		cout << from << "->" << to << endl;
+		return;
 	}
-	recursiveHanoi(num - 1,start, assistant, end );
-	cout << start << "->" << end << endl;
-	recursiveHanoi(num - 1, assistant, end, start);
+	recursiveHanoi(num - 1,from, by, to );
+	cout << from << "->" << to << endl;
+	recursiveHanoi(num - 1, by, to, from);
 }
+
