@@ -8,13 +8,6 @@ void iterativeFacSum(int n);
 
 int sum = 0;
 
-int main() {
-
-	recursiveFacSum(10);
-
-	return 0;
-}
-
 void recursiveFacSum(int n) {
 
 	if (n == 1) {

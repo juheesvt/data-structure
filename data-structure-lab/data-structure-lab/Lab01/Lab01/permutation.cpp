@@ -10,12 +10,6 @@ void print();
 int arr[] = { 1,2,3 };
 int cnt = 0;
 
-int main() {
-
-	recursivePermutation(sizeof(arr)/sizeof(int), sizeof(arr) / sizeof(int));
-
-	return 0;
-}
 
 void recursivePermutation(int n, int r) {
 

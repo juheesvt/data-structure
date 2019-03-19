@@ -5,13 +5,6 @@ using namespace std;
 int iterationFibonacci(int n);
 int recursiveFibonacci(int n);
 
-int main() {
-
-	cout << iterationFibonacci(4) << " " << recursiveFibonacci(4)<< endl;
-	
-
-	return 0;
-}
 
 int recursiveFibonacci(int n) {
 	

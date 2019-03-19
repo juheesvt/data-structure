@@ -5,12 +5,6 @@ using namespace std;
 int recursiveFactorial(int n);
 int iterationFactorial(int n);
 
-int main() {
-
-	cout << iterationFactorial(3) << " " << recursiveFactorial(3) << endl;
-	return 0;
-}
-
 int recursiveFactorial(int n) {
 
 	if (n == 1)

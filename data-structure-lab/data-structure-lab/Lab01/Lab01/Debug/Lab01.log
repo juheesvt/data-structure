@@ -1,2 +1,3 @@
-﻿  hanoi.cpp
-  Lab01.vcxproj -> C:\Users\juheeSVT\source\repos\data-structure\data-structure-lab\data-structure-lab\Lab01\Debug\Lab01.exe
+﻿  lab2-2.cpp
+lab2-2.obj : error LNK2005: "int __cdecl recursiveDiff(int,int)" (?recursiveDiff@@YAHHH@Z)이(가) difference.obj에 이미 정의되어 있습니다.
+C:\Users\juheeSVT\source\repos\data-structure\data-structure-lab\data-structure-lab\Lab01\Debug\Lab01.exe : fatal error LNK1169: 여러 번 정의된 기호가 있습니다.

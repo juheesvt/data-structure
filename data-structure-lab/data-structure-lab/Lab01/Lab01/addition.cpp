@@ -5,14 +5,6 @@ using namespace std;
 int recursiveAdd(int n, int m);
 int iterativeAdd(int n, int m);
 
-int main() {
-
-	cout << recursiveAdd(3, 7) << endl;
-	cout << iterativeAdd(4, 8) << endl;
-
-	return 0;
-}
-
 int recursiveAdd(int n, int m) {
 	if (!n)
 

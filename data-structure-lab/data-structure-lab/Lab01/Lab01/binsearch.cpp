@@ -5,15 +5,6 @@ using namespace std;
 int recursiveBinarySearch(int data[], int target, int left, int right);
 int iterationBinarySearch(int data[], int target, int left, int right);
 
-int main() {
-
-	int data[10] = { 0,2,4,7,18,20,39,40,56,100 };
-
-	cout << recursiveBinarySearch(data, 40, 0, 9) << endl;
-	cout << iterationBinarySearch(data, 56, 0, 9) << endl;
-
-	return 0;
-}
 
 int recursiveBinarySearch(int data[], int target, int left, int right) {
 
