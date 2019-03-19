@@ -36,5 +36,11 @@
     <ClCompile Include="factorial-to-add.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="stackHanoi.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="stack.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
