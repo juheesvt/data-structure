@@ -1,9 +1,7 @@
 #include <iostream>
-
-
 using namespace std;
 
-int compare(int , int );
+int compare(int, int);
 void polyAdd(int, int, int, int);
 void attach(int, int);
 
@@ -16,52 +14,17 @@ struct  Polynomial {
 
 Polynomial terms[MAX_TERMS];
 
-int avail=0;
+int avail = 0;
 int startA, finishA, startB, finishB;
-
-int main() {
-
-	freopen("polynomial.txt", "r", stdin);
-
-	for (int i = 0; i < 6; ++i) {
-		startA = 0;
-		cin >> terms[i].coef >> terms[i].expon;
-		avail++;
-	}
-	finishA = avail-1;
-	
-	for (int i = finishA + 1 ; i < 10; ++i) {
-		startB = finishA+1;
-		cin >> terms[i].coef >> terms[i].expon;
-		avail++;
-	}
-	finishB = avail-1;
-
-	polyAdd(startA, finishA, startB, finishB);
-
-
-	for (int i = finishB +1 ; i < avail; ++i) {
-		cout << terms[i].coef << "       ";
-	}
-	cout << endl;
-
-	for (int i = finishB +1 ; i < avail; ++i) {
-		cout << terms[i].expon << "      ";
-	}
-	cout << endl;
-
-
-
-}
 
 
 
 void polyAdd(int startA, int finishA, int startB, int finishB) {
 
-	float coefficient;
+	int coefficient;
 
 	while ((startA <= finishA) && (startB <= finishB)) {
-		
+
 
 		switch (compare(terms[startA].expon, terms[startB].expon)) {
 
@@ -69,7 +32,7 @@ void polyAdd(int startA, int finishA, int startB, int finishB) {
 			attach(terms[startB].coef, terms[startB].expon);
 			startB++;
 			break;
-		
+
 		case 0:
 			coefficient = terms[startA].coef + terms[startB].coef;
 			if (coefficient) {
@@ -78,6 +41,12 @@ void polyAdd(int startA, int finishA, int startB, int finishB) {
 				startB++;
 				break;
 			}
+			else {
+				startA++;
+				startB++;
+				break;
+			}
+
 
 		case 1:
 			attach(terms[startA].coef, terms[startA].expon);
@@ -97,16 +66,16 @@ void polyAdd(int startA, int finishA, int startB, int finishB) {
 
 int compare(int a, int b) {
 
-	if (a < b)		
+	if (a < b)
 		return -1;
-	else if (a == b)		
+	else if (a == b)
 		return 0;
-	else		
+	else
 		return  1;
 }
 
 void attach(int coefficient, int exponent) {
-	if (avail >= MAX_TERMS) 
+	if (avail >= MAX_TERMS)
 		cout << " too many elements..";
 
 	else {

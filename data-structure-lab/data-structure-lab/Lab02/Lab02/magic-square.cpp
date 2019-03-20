@@ -4,15 +4,6 @@ using namespace std;
 
 void magicSquare(int);
 
-int main() {
-
-	int n;
-	cout << "몇개의 행의 마방진을 만들겠습니까 ? ( n * n ) n = ";
-	cin >> n;
-
-	magicSquare(n);
-	return 0;
-}
 
 void magicSquare(int n) {
 

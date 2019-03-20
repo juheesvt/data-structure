@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\Lab">
+      <UniqueIdentifier>{cbcff632-0ca8-4041-9a52-10e1abc5753b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="figure.txt" />
@@ -27,6 +30,12 @@
     </ClCompile>
     <ClCompile Include="polynomial.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="lab03.cpp">
+      <Filter>소스 파일\Lab</Filter>
+    </ClCompile>
+    <ClCompile Include="extra-point.cpp">
+      <Filter>소스 파일\Lab</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
