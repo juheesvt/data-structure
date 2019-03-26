@@ -120,3 +120,6 @@ void fastTranspose(Term rowOrder[], Term colOrder[]) {
 	}
 }
 ```
+
+### 실행결과
+![Spare Matrix Transpose](./hw01-1 실행결과.png)
