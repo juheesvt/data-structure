@@ -9,6 +9,10 @@
 ### Algorithm 
 - triangle, rectangle, circle 의 각 제원을 데이터 파일로 받아, 구조체 배열에 저장한다
 - 도형의 이름마다 다른 넓이 공식을 이용해서 넓이를 계산한 후, 다시 구조체 배열에 저장한다 !
+- 넓이 구하는 공식
+    * circle : 반지름 x 반지름 x 3.14
+    * triangle : 밑변 x 높이 x 0.5
+    * rectangle : 가로 x 
 - 각 도형의 제원 및 넓이를 출력한다.
 
 ### Function
@@ -38,9 +42,9 @@ using namespace std;
 
 struct Figure {					// 각 도형의 이름과 변의 길이( 반지름, 높이,변 등), 그리고 넓이를 멤버로 가진 구조체
 	char name[9];
-	float a = 0;
-	float b = 0;
-	float area = 0;
+	float a = 0;				// a와 b는 삼각형인 경우에 각각 밑변과 높이,
+	float b = 0;				// 사각형인 경우에는 각각 가로와 세로, 원인 경우에는 a가 반지름이고 b는 사용하지 않는다
+	float area = 0;				// 계산된 넓이를 저장할 변수이다
 };
 
 Figure figure[7];				// 여러 도형의 정보를 저장할 Figure 타입 구조체 배열
