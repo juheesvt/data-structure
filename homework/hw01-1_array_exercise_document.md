@@ -46,27 +46,29 @@
 
 using namespace std;
 
-struct Term {
+struct Term {			// 효율적인 희소행렬에 들어갈 데이터
 	int row;
 	int col;
 	int value;
 };
 
-void fastTranspose(Term a[], Term b[]);
+void fastTranspose(Term a[], Term b[]);		// fastTranspose 알고리즘을 수행할 함수의 prototype
 
-Term rowOrder[9], colOrder[9];
+Term rowOrder[9], colOrder[9];			// 처음에 주어질 행우선 배열과, 전치된 열우선 배열을 저장할 구조체 배열 선언
 
 int main() {
 
-	freopen("homework01-1.txt", "r", stdin);
-	for (int i = 0; i < 9; ++i) {
-		cin >> rowOrder[i].row >> rowOrder[i].col >> rowOrder[i].value;
+	freopen("homework01-1.txt", "r", stdin);		// freopen으로 파일을 열어 stdin 입력으로 넘겨준다.
+	for (int i = 0; i < 9; ++i) {				// 원소 수만큼 for문을 돌면서
+		cin >> rowOrder[i].row >> rowOrder[i].col >> rowOrder[i].value;		// 순서대로 row, col, value에 저장해준다.		
 	}
 
-	fastTranspose(rowOrder, colOrder);
+	fastTranspose(rowOrder, colOrder);			// fastTranspose 함수를 호출한다.
+	
+	
 
 
-	for (int i = 0; i < colOrder->value+1; ++i) {
+	for (int i = 0; i < colOrder->value+1; ++i) {		
 		printf("%3d %3d %3d\n", colOrder[i].row, colOrder[i].col, colOrder[i].value);
 
 	}
