@@ -66,11 +66,9 @@ int main() {
 	fastTranspose(rowOrder, colOrder);			// fastTranspose 함수를 호출한다.
 	
 	
-
-
-	for (int i = 0; i < colOrder->value+1; ++i) {		
-		printf("%3d %3d %3d\n", colOrder[i].row, colOrder[i].col, colOrder[i].value);
-
+	// 전치된 colOrder matrix를 출력한다.
+	for (int i = 0; i < colOrder->value+1; ++i) {		// 각 열에 대한 원소 수 + 맨 위에 행과 열 원소수를 표시할 한줄을 추가 ! 
+		printf("%3d %3d %3d\n", colOrder[i].row, colOrder[i].col, colOrder[i].value);		// 간격 유지를 위해 3칸씩 차지
 	}
 	return 0;
 }
@@ -92,29 +90,32 @@ int main() {
 ```c
 void fastTranspose(Term rowOrder[], Term colOrder[]) {
 
-	int row_terms[MAX_COL], startingPos[MAX_COL];
-	int i, j, num_cols = rowOrder[0].col, num_terms = rowOrder[0].value;
+	int row_terms[MAX_COL], startingPos[MAX_COL];				// 인덱스에 해당하는 열의 갯수를 저장하는 배열 row_terms, 
+										// 각 열의 시작지점을 저장해놓은 배열 startingPos 선언
+	int i, j, num_cols = rowOrder[0].col, num_terms = rowOrder[0].value; 	// 반복문에서 index를 표시할 변수 i와
+										// startingPos의 정보를 저장할 j
+										// num_cols와 num_terms에는 각각 행과 원소 수를 할당함
 
-	colOrder[0].row = num_cols;
-	colOrder[0].col = rowOrder[0].row;
-	colOrder[0].value = num_terms;
+	colOrder[0].row = num_cols;			// colOrder의 행 정보에 기존 행렬의 row값 할당
+	colOrder[0].col = rowOrder[0].row;		// colOrder의 열 정보에 기존 행렬의 column값 할당
+	colOrder[0].value = num_terms;			// colOrder의 원소 수 정보에 기존 행렬의 원소 수값 할당
 
-	if (num_terms > 0 ){
-		for (i = 0; i < num_cols; i++) {
-			row_terms[i] = 0;			
+	if (num_terms > 0 ){				// 영행렬이 아닐 때, 즉 행렬의 크기가 1이상일 때
+		for (i = 0; i < num_cols; i++) {	
+			row_terms[i] = 0;		// 데이터가 존재하는 column 만큼 row_terms를 0으로 초기화 시켜준다.	
 		}
 		for (i = 1; i <= num_terms; i++) {
-			row_terms[rowOrder[i].col]++;
+			row_terms[rowOrder[i].col]++;	// 기존행렬의 행을 row_terms의 index로 표현하여 데이터 가있는 index의 값을 증가시킴. 
 		}
 
-		startingPos[0] = 1;
+		startingPos[0] = 1;			// startingPos[0]을 1로 초기화 시킨 이유 : 0에는 행렬과 원소수의 정보가 있기 때문 !
 		for (i = 1; i < num_cols; i++) {
-			startingPos[i] = startingPos[i - 1] + row_terms[i - 1];
+			startingPos[i] = startingPos[i - 1] + row_terms[i - 1];		// 시작위치 + 데이터의 수 = 다음 행의 시작위치
 		}
 
 		for (i = 1; i <= num_terms; i++) {					
-			j = startingPos[rowOrder[i].col]++;
-			colOrder[j].row = rowOrder[i].col;
+			j = startingPos[rowOrder[i].col]++;		// j에 startingPos을 이용해 해당 열에 대한 데이터의 시작위치를 저장									     // 하고 startingPos를 증가시킨다. 
+			colOrder[j].row = rowOrder[i].col;		// 행과 열을 전치 시켜서 colOrder 배열에 
 			colOrder[j].col = rowOrder[i].row;
 			colOrder[j].value = rowOrder[i].value;
 		}
