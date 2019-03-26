@@ -122,4 +122,4 @@ void fastTranspose(Term rowOrder[], Term colOrder[]) {
 ```
 
 ### 실행결과
-![Spare Matrix Transpose](./hw01-1 실행결과.png)
+![Spare Matrix Transpose](https://github.com/juheesvt/data-structure/blob/master/homework/hw01-1%20%EC%8B%A4%ED%96%89%EA%B2%B0%EA%B3%BC.png)
