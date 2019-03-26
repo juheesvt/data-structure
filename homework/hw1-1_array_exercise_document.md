@@ -31,7 +31,7 @@
   
 ### 코드 상세 설명
 
-- main (main.cpp)
+- main (hw01-1.cpp)
   + Description
     * freopen을 이용해 파일을 열어서 전치할 배열에 초기 데이터를 삽입한다.
     * fastTranspose 함수를 실행해 행 우선 배열을 전치시킨다.
@@ -71,5 +71,52 @@ int main() {
 
 	}
 	return 0;
+}
+```
+
+- fastTranspose (hw01-1.cpp)
+    + Description
+        * row major matrix를 받아 fast transpose algorithm을 수행한다.
+    + Variable
+        * rowOrder[] : 전치할 행렬의 데이터를 담은 배열
+        * colOrder[] : rowOrder 배열을 전치시켜서 데이터를 저장할 배열, 최종 결과물 !
+        * row_terms[] : 해당 인덱스의 열의 원소 수를 저장하는 배열 ! 
+        * startingPos [] : 해당 인덱스의 열의 원소가 저장되기 시작할 위치를 저장하는 배열 !
+        * i : for문에서 인덱스를 지정할 변수 
+        * j : startingPos에서 전치할 배열의 해당 열의 시작지점을 저장할 변수. 시작지점을 할당하고, startingPos는 증가시킨다.
+        * num_cols : 전치할 배열의 열의 개수를 저장하는 변수
+        * num_terms : 전치할 배열의 원소 수를 저장할 변수 
+	
+```c
+void fastTranspose(Term rowOrder[], Term colOrder[]) {
+
+	int row_terms[MAX_COL], startingPos[MAX_COL];
+	int i, j, num_cols = rowOrder[0].col, num_terms = rowOrder[0].value;
+
+	colOrder[0].row = num_cols;
+	colOrder[0].col = rowOrder[0].row;
+	colOrder[0].value = num_terms;
+
+	if (num_terms > 0 ){
+		for (i = 0; i < num_cols; i++) {
+			row_terms[i] = 0;			
+		}
+		for (i = 1; i <= num_terms; i++) {
+			row_terms[rowOrder[i].col]++;
+		}
+
+		startingPos[0] = 1;
+		for (i = 1; i < num_cols; i++) {
+			startingPos[i] = startingPos[i - 1] + row_terms[i - 1];
+		}
+
+		for (i = 1; i <= num_terms; i++) {					
+			j = startingPos[rowOrder[i].col]++;
+			colOrder[j].row = rowOrder[i].col;
+			colOrder[j].col = rowOrder[i].row;
+			colOrder[j].value = rowOrder[i].value;
+		}
+
+	}
 }
 ```
