@@ -107,4 +107,4 @@ void areaCalculate(Figure figure[], int numOfData) {
 ```
 
 ### 실행결과
-![순서대로 도형의 이름, 각 제원의 길이, 넓이](./hw01-2 실행결과.png)
+![순서대로 도형의 이름, 각 제원의 길이, 넓이](https://github.com/juheesvt/data-structure/blob/master/homework/hw01-2%20%EC%8B%A4%ED%96%89%EA%B2%B0%EA%B3%BC.png)
