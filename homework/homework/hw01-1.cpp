@@ -54,7 +54,8 @@ void fastTranspose(Term rowOrder[], Term colOrder[]) {
 			startingPos[i] = startingPos[i - 1] + row_terms[i - 1];
 		}
 
-		for (i = 1; i <= num_terms; i++) {					j = startingPos[rowOrder[i].col]++;
+		for (i = 1; i <= num_terms; i++) {					
+			j = startingPos[rowOrder[i].col]++;
 			colOrder[j].row = rowOrder[i].col;
 			colOrder[j].col = rowOrder[i].row;
 			colOrder[j].value = rowOrder[i].value;
