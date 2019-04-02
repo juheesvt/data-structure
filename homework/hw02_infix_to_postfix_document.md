@@ -23,7 +23,8 @@
     + 반복문을 이용해 getToken() 함수의 argument로 buff 배열의 i 번째 인덱스를 넘긴다.
     + getToken()은 입력받은 연산자(또는 피연산자)를 enum 형태로 넘겨주는 함수이다.
     + getToken() 에서 반환된 것이 피연산자면 postfix배열과 stack에 넣는다.   
-    + getToken() 에서 반환된 것이 '('면 stack에 넣고, ')'이면 stack의 top요소고 '('일 때까지 pop하고 pop한 요소를 postfix에 넣는다.
+    + getToken() 에서 반환된 것이 '('면 stack에 넣고, ')'이면  
+      stack의 top요소가 '('일 때까지 pop하고 pop한 요소를 postfix에 넣는다.
     + 그리고 마지막으로 한번 더 pop해서 ')'를 제거해준다.
     + 만약에 getToken() 에서 반환된 것이 연산자면, 스택의 top요소와 buff[i]의 우선순위를 비교해,  
       buff에서 받아온 연산자의 우선순위가 높거나 같을 때만 buff[i]를 push해주고 아닐때는 stack의  
@@ -104,14 +105,14 @@
 // 열거형 타입 precedence 선언
 typedef enum { lparen, rparen, plus, minus, times, divide, mod, eos, operand } precedence;
 
+// 구현할 함수의 prototype
+void infixToPostfix(char []);		// 중위 연산을 후위 연산으로 바꾸는 함수
+int operatePostfix(char []);		// 후위 연산식을 계산하는 함수
+precedence getToken(char );		// 연산자에 할당된 숫자를 반환하는 함수
 
-void infixToPostfix(char []);
-int operatePostfix(char []);
-precedence getToken(char );
 
-
-static int isp[] = { 0,19,12,12,13,13,13,0 };
-static int icp[] = { 20,19,12,12,13,13,13,0 };
+static int isp[] = { 0,19,12,12,13,13,13,0 };		// in stack precedence
+static int icp[] = { 20,19,12,12,13,13,13,0 };		// in comming precedence
 ```
 
 - main (hw02.cpp)
@@ -125,13 +126,13 @@ static int icp[] = { 20,19,12,12,13,13,13,0 };
 ```c
 int main() {
 	
-	ifstream inFile("homework02.txt");
-	char buff[sizeStack];
+	ifstream inFile("homework02.txt");		// 파일 객체
+	char buff[sizeStack];				// 연산식을 저장할 배열
 	
-	while (inFile.getline(buff, 100)) {
+	while (inFile.getline(buff, 100)) {		// 데이터 파일에 데이터가 없을 때까지 한줄씩 받아오기
 		cout << "1) Echo data (infix form) : " << buff << endl;
 		cout << "2) Conversion (postfix form) : ";
-		infixToPostfix(buff);
+		infixToPostfix(buff);			// 입력된 연산식을 변환 함수에 넣어주기
 		
 	}
 	return 0;
@@ -152,39 +153,40 @@ int main() {
 ```c
 void infixToPostfix(char buff[]) {
 	
-	Stack<char> s;
+	Stack<char> s;			// char형 stack인 객체 s 생성
 
-	char postfix[sizeStack] = { 0, };
-	int pCnt = 0;
+	char postfix[sizeStack] = { 0, };	// 변환된 식을 저장할 배열
+	int pCnt = 0;				// postfix 배열의 인덱스를 가리킬 변수
 	
-	s.push(' ');
+	s.push(' ');				// 스택의 맨 아래에 연산식의 끝을 알리는 공백문자 넣기
 	
 	for (int i = 0; buff[i] != '\0'; i++) {
-		if (getToken(buff[i]) == operand) {
-			cout << buff[i];
-			postfix[pCnt++] = buff[i];
+		if (getToken(buff[i]) == operand) {	// 받아온 데이터가 피연산자면
+			cout << buff[i];		// 콘솔창에 출력하고
+			postfix[pCnt++] = buff[i];	// postfix 배열에 넣기
 		}
 
-		else if (getToken(buff[i]) == lparen)
-			s.push('(');
+		else if (getToken(buff[i]) == lparen)	// 받아온 데이터가 '(' 이면
+			s.push('(');			// 스택에 넣기
 
-		else if (getToken(buff[i]) == rparen) {
-			while (s.getStackOfTop() != '(') {
-				char temp = s.pop();
-				cout << temp;
-				postfix[pCnt++] = temp;
+		else if (getToken(buff[i]) == rparen) {		// 받아온 데이터가 ')'면
+			while (s.getStackOfTop() != '(') {	// 스택의 top이 '(' 일때까지
+				char temp = s.pop();		
+				cout << temp;			// 스택의 맨위 요소를 출력하고
+				postfix[pCnt++] = temp;		// postfix 배열에 넣는다
 			}
-			s.pop();						// remove '(' 
+			s.pop();		// remove '(' 
 		}
 		
 		else {
+			// 받아온 데이터의 연산자의 우선순위가 스택의 top의 우선순위보다 크다면
 			if (isp[getToken(s.getStackOfTop())] <= icp[getToken(buff[i])])
-				s.push(buff[i]);
+				s.push(buff[i]);		// 스택에 넣기
 			else {
-				char temp = s.pop();
-				cout << temp;
-				s.push(buff[i]);
-				postfix[pCnt++] = temp;
+				char temp = s.pop();		// 아니라면 
+				cout << temp;			// 스택의 top 요소를 pop 해서 출력하고
+				s.push(buff[i]);		// 받아온 연산자를 push하고
+				postfix[pCnt++] = temp;		// pop했던 데이터를 postfix 배열에 넣기
 			}
 		}	
 	}
@@ -196,6 +198,7 @@ void infixToPostfix(char buff[]) {
 	}
 	cout << endl;
 	
+	// 후위 연산식 계산을 위해 변환된 postfix 배열을 후위 연산식 계산 함수로 넘겨주기
 	cout << "3) Result :  " << operatePostfix(postfix) << endl << endl;
 		
 }
@@ -208,9 +211,10 @@ void infixToPostfix(char buff[]) {
     * Variable
         + ```Stack <int> p``` : 후위 연산식의 연산 결과를 저장할 스택
         + ```int op1, op2``` : 토큰이 연산자일때, 스택에서 pop한 숫자를 저장할 변수
+	
 ```c
 int operatePostfix(char postfix[]) {
-	Stack<int> p;
+	Stack<int> p;		
 	int op1, op2;
 
 	for (int i = 0;  postfix[i] != '\0'; i++) {
@@ -334,10 +338,16 @@ public:
 };
 #endif
 ```
-    
 
-
-
+### 데이터 파일
+- homework02.txt
+```txt
+2+3
+2+3*5
+3*5+9-3
+9*(1+2)
+3+9*(5-2)
+```
 
 ### 실행결과
-![]()
+![](https://github.com/juheesvt/data-structure/blob/master/homework/hw02%20%EC%8B%A4%ED%96%89%EA%B2%B0%EA%B3%BC.png)
