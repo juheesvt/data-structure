@@ -77,14 +77,14 @@
     + top값으로 확인 !
 
 - Stack<T>::isFull (stack.hpp)
-   + stack이 최대크기만큼 차있으면 1, 아니면 0을 반환한다.
-   + top과 sizeStack으로 확인 !
+    + stack이 최대크기만큼 차있으면 1, 아니면 0을 반환한다.
+    + top과 sizeStack으로 확인 !
    
-- Stack<T>::displau (stack.hpp)
-   + stack의 있는 요소들을 다 출력시킨다.
+- Stack<T>::display (stack.hpp)
+    + stack의 있는 요소들을 다 출력시킨다.
    
 - Stack<T>::getStackTop (stack.hpp)
-   + stack을 pop()하지 않고도 stack의 top요소에 접근할 수 있도록 stack[top]을 반환해준다.
+    + stack을 pop()하지 않고도 stack의 top요소에 접근할 수 있도록 stack[top]을 반환해준다.
 
 ## 코드 상세 설명
 - 전역 변수
