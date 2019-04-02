@@ -22,6 +22,7 @@ int main() {
 		cout << "1) Echo data (infix form) : " << buff << endl;
 		cout << "2) Conversion (postfix form) : ";
 		infixToPostfix(buff);
+		
 	}
 	
 
@@ -57,12 +58,13 @@ void infixToPostfix(char buff[]) {
 		}
 		
 		else {
-			if (isp[s.getStackOfTop()] <= icp[getToken(buff[i])])
+			if (isp[getToken(s.getStackOfTop())] <= icp[getToken(buff[i])])
 				s.push(buff[i]);
 			else {
-				cout << s.pop();
+				char temp = s.pop();
+				cout << temp;
 				s.push(buff[i]);
-				postfix[pCnt++] = buff[i];
+				postfix[pCnt++] = temp;
 			}
 		}	
 	}
@@ -74,7 +76,7 @@ void infixToPostfix(char buff[]) {
 	}
 	cout << endl;
 	
-	cout << "3) Result :  " << OperatePostfix(postfix);
+	cout << "3) Result :  " << OperatePostfix(postfix) << endl << endl;
 		
 }
 
