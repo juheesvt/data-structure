@@ -103,16 +103,24 @@
 #include "stack.hpp"
 
 // 열거형 타입 precedence 선언
-typedef enum { lparen, rparen, plus, minus, times, divide, mod, eos, operand } precedence;
+typedef enum { lparen, rparen, plus, minus, times,
+		divide, mod, eos, operand } precedence;
 
 // 구현할 함수의 prototype
-void infixToPostfix(char []);		// 중위 연산을 후위 연산으로 바꾸는 함수
-int operatePostfix(char []);		// 후위 연산식을 계산하는 함수
-precedence getToken(char );		// 연산자에 할당된 숫자를 반환하는 함수
+// 중위 연산을 후위 연산으로 바꾸는 함수
+void infixToPostfix(char []);  	
 
+// 후위 연산식을 계산하는 함수
+int operatePostfix(char []);  
 
-static int isp[] = { 0,19,12,12,13,13,13,0 };		// in stack precedence
-static int icp[] = { 20,19,12,12,13,13,13,0 };		// in comming precedence
+// 연산자에 할당된 숫자를 반환하는 함수
+precedence getToken(char );	
+
+// in stack precedence
+static int isp[] = { 0,19,12,12,13,13,13,0 };
+
+// in comming precedence
+static int icp[] = { 20,19,12,12,13,13,13,0 };		
 ```
 
 - main (hw02.cpp)
@@ -129,11 +137,13 @@ int main() {
 	ifstream inFile("homework02.txt");		// 파일 객체
 	char buff[sizeStack];				// 연산식을 저장할 배열
 	
-	while (inFile.getline(buff, 100)) {		// 데이터 파일에 데이터가 없을 때까지 한줄씩 받아오기
+	// 데이터 파일에 데이터가 없을 때까지 한줄씩 받아오기
+	while (inFile.getline(buff, 100)) {				
 		cout << "1) Echo data (infix form) : " << buff << endl;
 		cout << "2) Conversion (postfix form) : ";
-		infixToPostfix(buff);			// 입력된 연산식을 변환 함수에 넣어주기
 		
+		// 입력된 연산식을 변환 함수에 넣어주기
+		infixToPostfix(buff);			
 	}
 	return 0;
 }
@@ -156,12 +166,17 @@ void infixToPostfix(char buff[]) {
 	Stack<char> s;			// char형 stack인 객체 s 생성
 
 	char postfix[sizeStack] = { 0, };	// 변환된 식을 저장할 배열
-	int pCnt = 0;				// postfix 배열의 인덱스를 가리킬 변수
 	
-	s.push(' ');				// 스택의 맨 아래에 연산식의 끝을 알리는 공백문자 넣기
+	// postfix 배열의 인덱스를 가리킬 변수
+	int pCnt = 0;				
+	
+	// 스택의 맨 아래에 연산식의 끝을 알리는 공백문자 넣기
+	s.push(' ');	
 	
 	for (int i = 0; buff[i] != '\0'; i++) {
-		if (getToken(buff[i]) == operand) {	// 받아온 데이터가 피연산자면
+		
+		// 받아온 데이터가 피연산자면
+		if (getToken(buff[i]) == operand) {	
 			cout << buff[i];		// 콘솔창에 출력하고
 			postfix[pCnt++] = buff[i];	// postfix 배열에 넣기
 		}
@@ -169,24 +184,28 @@ void infixToPostfix(char buff[]) {
 		else if (getToken(buff[i]) == lparen)	// 받아온 데이터가 '(' 이면
 			s.push('(');			// 스택에 넣기
 
-		else if (getToken(buff[i]) == rparen) {		// 받아온 데이터가 ')'면
-			while (s.getStackOfTop() != '(') {	// 스택의 top이 '(' 일때까지
+		// 받아온 데이터가 ')'면
+		else if (getToken(buff[i]) == rparen) {	
+		
+			// 스택의 top이 '(' 일때까지
+			while (s.getStackOfTop() != '(') {	
 				char temp = s.pop();		
-				cout << temp;			// 스택의 맨위 요소를 출력하고
-				postfix[pCnt++] = temp;		// postfix 배열에 넣는다
+				cout << temp;			// 스택의 맨위 요소를 출력
+				postfix[pCnt++] = temp;		// postfix 배열에 넣기
 			}
 			s.pop();		// remove '(' 
 		}
 		
 		else {
-			// 받아온 데이터의 연산자의 우선순위가 스택의 top의 우선순위보다 크다면
-			if (isp[getToken(s.getStackOfTop())] <= icp[getToken(buff[i])])
+	// 받아온 데이터의 연산자의 우선순위가 스택의 top의 우선순위보다 크다면
+			if (isp[getToken(s.getStackOfTop())] 
+				<= icp[getToken(buff[i])])
 				s.push(buff[i]);		// 스택에 넣기
 			else {
 				char temp = s.pop();		// 아니라면 
-				cout << temp;			// 스택의 top 요소를 pop 해서 출력하고
-				s.push(buff[i]);		// 받아온 연산자를 push하고
-				postfix[pCnt++] = temp;		// pop했던 데이터를 postfix 배열에 넣기
+				cout << temp;			// 스택의 top 요소를 pop&출력
+				s.push(buff[i]);		// 받아온 연산자를 push
+				postfix[pCnt++] = temp;		// postfix 배열에 넣기
 			}
 		}	
 	}
@@ -198,8 +217,9 @@ void infixToPostfix(char buff[]) {
 	}
 	cout << endl;
 	
-	// 후위 연산식 계산을 위해 변환된 postfix 배열을 후위 연산식 계산 함수로 넘겨주기
-	cout << "3) Result :  " << operatePostfix(postfix) << endl << endl;
+// 후위 연산식 계산을 위해 변환된 postfix 배열을 후위 연산식 계산 함수로 넘겨주기
+	cout << "3) Result :  " << 
+		operatePostfix(postfix) << endl << endl;
 		
 }
 ```
@@ -217,17 +237,20 @@ int operatePostfix(char postfix[]) {
 	Stack<int> p;			// int형 stack p 객체 생성
 	int op1, op2;			// 숫자 저장할 변수
 
-	for (int i = 0;  postfix[i] != '\0'; i++) {	// postfix의 수식 도는 loop
-		if (getToken(postfix[i]) == operand)	// 받아온 데이터가 피연산자이면
-			p.push(postfix[i]-'0');		// 숫자로 stack에 push하기
+	// postfix의 수식 도는 loop
+	for (int i = 0;  postfix[i] != '\0'; i++) {
+	
+		// 받아온 데이터가 피연산자이면
+		if (getToken(postfix[i]) == operand)	
+			p.push(postfix[i]-'0');		// 숫자로 stack에 push 
 
-		else {					// 받아온 데이터가 연산자면
-			op2 = p.pop();			// pop 두 번으로 숫자를 변수에 저장해서
+		else {				// 받아온 데이터가 연산자면
+			op2 = p.pop();		// pop 두 번으로 숫자를 변수에 저장
 			op1 = p.pop();
 			
-			switch (postfix[i]) {		// 사칙 연산하기, postfix[i] 는 연산자
+			switch (postfix[i]) {	// 사칙 연산하기
 			case '+':
-				p.push(op1 + op2);	// 연산된 결과를 다시 push해준다.
+				p.push(op1 + op2);	// 연산된 결과를 다시 push
 				break;
 			case '-':
 				p.push(op1 - op2);
@@ -253,8 +276,8 @@ int operatePostfix(char postfix[]) {
         + ```char token``` : getToken() 의 parameter, 연산자를 받아온다.
 ```c
 precedence getToken(char token) {
-	
-	switch (token) {		// 데이터를 받아 해당 연산자에 맞는 enum 값 반환해주기
+	// 데이터를 받아 해당 연산자에 맞는 enum 값 반환해주기
+	switch (token) {		
 	case '(':
 		return lparen;
 	case ')':
@@ -295,25 +318,28 @@ using namespace std;
 
 const int sizeStack = 100;		// 스택 최대 사이즈 선언
 
-template <typename T>			// 여러 데이터 타입에 쓸 수 있도록 template로 생성하기
+// 여러 데이터 타입에 쓸 수 있도록 template로 생성하기
+template <typename T>	 
 class Stack {
 private:
 	T stack[sizeStack] = { 0, };	// 데이터를 처리할 stack 배열
-	int top;			// stack의 가장 최근, 가장 위의 데이터의 인덱스를 가리키는 변수
+	int top;			// stack의 가장 최근 인덱스를 가리키는 변수
 
 public:
 	Stack() {			// 생성자
-		top = -1;		// stack 에는 아무것도 없으므로 top을 -1로 초기화
+		top = -1;		// s에는 아무것도 없으므로 top을 -1로 초기화
 	}
 	~Stack() {				// 소멸자
-		for (; isEmpty() == false;) 	// 스택이 빌 때 까지 pop해서 데이터 끄집어내기
+		for (; isEmpty() == false;) 	// 스택이 빌 때 까지 pop
 			pop();
 	}
 	void push(T val) {			// stack 에 데이터를 집어넣는 함수
 		stack[++top] = val;
 	}
 	T pop() {
-		T pop_val = stack[top];		// stack의 가장 최근의 데이터를 반환하고, 끄집어내는 함수 !
+	
+		// stack의 가장 최근의 데이터를 반환하고, 끄집어내는 함수 !
+		T pop_val = stack[top];		
 		stack[top--] = NULL;
 		return pop_val;
 	}
@@ -327,7 +353,7 @@ public:
 			return 1;
 		return 0;
 	}
-	void display() {			// stack에 존재하는 데이터를 보여주는 함수
+	void display() {		// stack에 존재하는 데이터를 보여주는 함수
 		for (int i = 0; i < top; ++i) 
 			cout << stack[i] << " ";
 		cout << endl;
