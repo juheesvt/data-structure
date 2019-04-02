@@ -214,20 +214,20 @@ void infixToPostfix(char buff[]) {
 	
 ```c
 int operatePostfix(char postfix[]) {
-	Stack<int> p;		
-	int op1, op2;
+	Stack<int> p;			// int형 stack p 객체 생성
+	int op1, op2;			// 숫자 저장할 변수
 
-	for (int i = 0;  postfix[i] != '\0'; i++) {
-		if (getToken(postfix[i]) == operand)
-			p.push(postfix[i]-'0');	
+	for (int i = 0;  postfix[i] != '\0'; i++) {	// postfix의 수식 도는 loop
+		if (getToken(postfix[i]) == operand)	// 받아온 데이터가 피연산자이면
+			p.push(postfix[i]-'0');		// 숫자로 stack에 push하기
 
-		else {
-			op2 = p.pop();
+		else {					// 받아온 데이터가 연산자면
+			op2 = p.pop();			// pop 두 번으로 숫자를 변수에 저장해서
 			op1 = p.pop();
 			
-			switch (postfix[i]) {
+			switch (postfix[i]) {		// 사칙 연산하기, postfix[i] 는 연산자
 			case '+':
-				p.push(op1 + op2);
+				p.push(op1 + op2);	// 연산된 결과를 다시 push해준다.
 				break;
 			case '-':
 				p.push(op1 - op2);
@@ -241,7 +241,7 @@ int operatePostfix(char postfix[]) {
 			}
 		}
 	}
-	return p.pop();
+	return p.pop();		// 최종 값 반환하기
 }
 ```
 
@@ -254,7 +254,7 @@ int operatePostfix(char postfix[]) {
 ```c
 precedence getToken(char token) {
 	
-	switch (token) {
+	switch (token) {		// 데이터를 받아 해당 연산자에 맞는 enum 값 반환해주기
 	case '(':
 		return lparen;
 	case ')':
@@ -272,7 +272,7 @@ precedence getToken(char token) {
 	case ' ':
 		return eos;
 	default:
-		return operand;
+		return operand;		// 해당하는 연산자가 없으면 피연산자로 간주 !
 	}
 }
 ```
@@ -293,46 +293,46 @@ precedence getToken(char token) {
 
 using namespace std;
 
-const int sizeStack = 100;
+const int sizeStack = 100;		// 스택 최대 사이즈 선언
 
-template <typename T>
+template <typename T>			// 여러 데이터 타입에 쓸 수 있도록 template로 생성하기
 class Stack {
 private:
-	T stack[sizeStack] = { 0, };
-	int top;
+	T stack[sizeStack] = { 0, };	// 데이터를 처리할 stack 배열
+	int top;			// stack의 가장 최근, 가장 위의 데이터의 인덱스를 가리키는 변수
 
 public:
-	Stack() {
-		top = -1;
+	Stack() {			// 생성자
+		top = -1;		// stack 에는 아무것도 없으므로 top을 -1로 초기화
 	}
-	~Stack() {
-		for (; isEmpty() == false;) 
+	~Stack() {				// 소멸자
+		for (; isEmpty() == false;) 	// 스택이 빌 때 까지 pop해서 데이터 끄집어내기
 			pop();
 	}
-	void push(T val) {
+	void push(T val) {			// stack 에 데이터를 집어넣는 함수
 		stack[++top] = val;
 	}
 	T pop() {
-		T pop_val = stack[top];
+		T pop_val = stack[top];		// stack의 가장 최근의 데이터를 반환하고, 끄집어내는 함수 !
 		stack[top--] = NULL;
 		return pop_val;
 	}
 	int isEmpty() {
-		if (top == -1) 
+		if (top == -1) 			// stack 이 비어있는지 검사하는 함수
 			return 1;
 		return 0;
 	}
-	int isFull() {
+	int isFull() {				// stack이 다 찼는지 확인하는 함수
 		if (top == sizeStack)
 			return 1;
 		return 0;
 	}
-	void display() {
+	void display() {			// stack에 존재하는 데이터를 보여주는 함수
 		for (int i = 0; i < top; ++i) 
 			cout << stack[i] << " ";
 		cout << endl;
 	}
-	T getStackOfTop() {
+	T getStackOfTop() {			// 외부에서 stack의 가장 최근의 데이터를 접근할 수 있게 한 getter
 		return stack[top];
 	}
 };
