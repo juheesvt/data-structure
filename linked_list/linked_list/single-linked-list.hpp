@@ -171,6 +171,22 @@ public:
 			cout << index << endl;
 		return index;
 	}
+
+
+	void reverse() {
+		Node<T> * middle, *trail;
+		middle = NULL;
+
+		while (head) {
+			trail = middle;
+			middle = head;
+			head = head->getNext();
+			middle->setNext(trail);
+		}
+		head = middle;
+	}
+
+
 	~SingleLinkedList() {
 		if (!isEmpty()) {
 
@@ -194,6 +210,7 @@ public:
 			}
 		}
 	}
+
 
 };
 #endif

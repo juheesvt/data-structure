@@ -25,6 +25,8 @@ int main() {
 	sll.insert(-10);
 	sll.append(-100);
 	sll.display();
+	sll.reverse();
+	sll.display();
 
 	return 0;
 }
