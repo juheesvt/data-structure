@@ -1,9 +1,8 @@
-#ifndef  MAIN_CPP
-#define MAIN_CPP
-#include "single_linked_list.h"
+
+#include "single-linked-list.hpp"
 
 int main() {
-	SingleLinkedList sll;
+	SingleLinkedList<int> sll;
 	if (sll.isEmpty())
 		cout << "Empty !" << endl;
 
@@ -22,10 +21,12 @@ int main() {
 	sll.del(5);
 	sll.del(10);
 	sll.display();
+	sll.insert(-5);
+	sll.insert(-10);
+	sll.append(-100);
+	sll.display();
 
 	return 0;
 }
-
-#endif // ! MAIN_CPP
 
 

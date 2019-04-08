@@ -14,6 +14,7 @@ private:
 
 public:
 	Stack();
+	~Stack();
 	void push(char val);
 	char pop();
 	int isEmpty();

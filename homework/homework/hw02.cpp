@@ -6,7 +6,7 @@ typedef enum { lparen, rparen, plus, minus, times, divide, mod, eos, operand } p
 
 
 void infixToPostfix(char []);
-int OperatePostfix(char []);
+int operatePostfix(char []);
 precedence getToken(char );
 
 
@@ -24,8 +24,6 @@ int main() {
 		infixToPostfix(buff);
 		
 	}
-	
-
 	return 0;
 }
 
@@ -76,14 +74,13 @@ void infixToPostfix(char buff[]) {
 	}
 	cout << endl;
 	
-	cout << "3) Result :  " << OperatePostfix(postfix) << endl << endl;
+	cout << "3) Result :  " << operatePostfix(postfix) << endl << endl;
 		
 }
 
-int OperatePostfix(char postfix[]) {
+int operatePostfix(char postfix[]) {
 	Stack<int> p;
 	int op1, op2;
-	int n = 0; // 수식 스트링을 위한
 
 	for (int i = 0;  postfix[i] != '\0'; i++) {
 		if (getToken(postfix[i]) == operand)
@@ -110,8 +107,6 @@ int OperatePostfix(char postfix[]) {
 		}
 	}
 	return p.pop();
-	
-	return 0;
 }
 
 

@@ -3,47 +3,56 @@
 #include "stack.h"
 
 Stack::Stack() {
-	top = 0;
+	top = 0-1;
 }
 
+Stack::~Stack() {
+	for (; isEmpty() == false;)
+		pop();
+}
+
+
 int Stack::isEmpty() {
-	if (!top) {
-		cout << "empty !" << endl;
+	if (top == -1) 
 		return 1;
-	}
-	else {
-		cout << "not empty !" << endl;
+	else 
 		return 0;
-	}
 }
 
 int Stack::isFull() {
-	if (top) {
-		cout << "full !" << endl;
-		return 1;
-	}
-	else {
-		cout << " not full !" << endl;
+	if (top == sizeStack - 1)
+		return 1;	
+	else 
 		return 0;
-	}
+	
 }
 
 void Stack::push(char val) {
-	stack[top++] = val;
+	if (isFull())
+		cout << "Stack is Full" << endl;
+	else
+		stack[++top] = val;
 }
 
 char Stack::pop() {
-	char pop_val = stack[top];
-	stack[top--] = NULL;
-	return pop_val;
+	if (isEmpty())
+		cout << "StackEmpty" << endl;
+	else {
+		char pop_val = stack[top];
+		stack[top--] = NULL;
+		return pop_val;
+	}
 }
 
 void Stack::display() {
-
-	for (int i = 0; i < top; ++i) {
-		cout << stack[i] << " ";
+	if (isEmpty())
+		cout << "StackEmpty" << endl;
+	else {
+		cout << "Stack : ";
+		for (int i = top; i >= 0; i--)
+			cout << stack[i] << " ";
+		cout << endl;
 	}
-	cout << endl;
 }
 
 

@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Node.h" />
+    <ClInclude Include="single-linked-list.hpp" />
     <ClInclude Include="single_linked_list.h" />
   </ItemGroup>
   <ItemGroup>

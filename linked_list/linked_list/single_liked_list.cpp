@@ -123,7 +123,6 @@ SingleLinkedList::~SingleLinkedList() {
 
 	if (!isEmpty()) {
 
-
 		Node * del_node = head;
 		Node * next_del_node = head->getNext();
 
