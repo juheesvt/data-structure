@@ -171,7 +171,23 @@ public:
 			cout << index << endl;
 		return index;
 	}
-
+	
+	void concatenate(Node<T>* list2head, int list2tail) { 
+		if (isEmpty()) {
+			head = list2head;
+			tail = list2tail;
+		}
+		else {
+			Node<T> * temp = head;
+			for (;; temp = temp->getNext()) {
+				if (temp->getNext() == NULL) {
+					temp->setNext(list2head);
+					tail += list2tail;
+					break;
+				}
+			}
+		}
+	}
 
 	void reverse() {
 		Node<T> * middle, *trail;
@@ -185,6 +201,12 @@ public:
 		}
 		head = middle;
 	}
+
+	Node<T> * getHead() {
+		return this->head;
+	}
+
+	
 
 
 	~SingleLinkedList() {
