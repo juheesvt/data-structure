@@ -3,7 +3,7 @@
 #include "stack.h"
 
 Stack::Stack() {
-	top = 0-1;
+	top = -1;
 }
 
 Stack::~Stack() {
@@ -21,10 +21,9 @@ int Stack::isEmpty() {
 
 int Stack::isFull() {
 	if (top == sizeStack - 1)
-		return 1;	
-	else 
+		return 1;
+	else
 		return 0;
-	
 }
 
 void Stack::push(char val) {

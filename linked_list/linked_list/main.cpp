@@ -1,43 +1,21 @@
 
-#include "single-linked-list.hpp"
+#include "single-linked-list-stack.hpp"
 
 int main() {
-	SingleLinkedList<int> sll;
-	SingleLinkedList<int> sll2;
-	if (sll.isEmpty())
-		cout << "Empty !" << endl;
+	SingleLinkedListStack<int> s;
 
-	sll.insert(10);
-	sll.display();
-	sll.insert(5);
-	sll.display();
-	sll.insert(0);
-	sll.insert(100);
-	sll.display();
-	sll.del(0);
-	sll.display();
-	sll.del(100);
-	sll.display();
-	sll.del(2);
-	sll.del(5);
-	sll.del(10);
-	sll.display();
-	sll.insert(-5);
-	sll.insert(-10);
-	sll.append(-100);
-	sll.display();
-	// -5 -10 -100
+	if (s.isEmpty())
+		cout << "stack is Empty !" << endl;
+	else
+		cout << "stack isn't Empty !" << endl;
 
-	sll2.append(1);
-	sll2.append(2);
-	sll2.insert(0);
-	sll2.display();
+	s.push(1);
+	s.push(2);
+	s.push(10);
+	s.display();
+	cout << s.pop() << endl;
+	s.display();
 
-	sll2.reverse();
-	sll2.display();
-
-	sll2.concatenate(sll.getHead(), sll.size()); // 2 1 0 -5 -10 -100
-	sll2.display();
 
 	return 0;
 }

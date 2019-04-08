@@ -89,6 +89,21 @@ public:
 		tail += 1;
 	}
 
+	void push(T data) {
+		Node<T> * node = new Node<T>();
+		node->setData(data);
+
+		if (isEmpty()) 
+			head = node;
+		else {
+			Node<T> * temp = head;
+			head = node;
+			head->setNext(temp);
+		}
+		tail++;
+			
+	}
+
 	void append(T data) {
 
 		Node<T> * node = new Node<T>();
@@ -206,7 +221,14 @@ public:
 		return this->head;
 	}
 
-	
+	void setHead(Node<T> * head) {
+		this->head = head;
+	}
+
+	void setTail(int top) {
+		this->tail = top + 1;
+	}
+
 
 
 	~SingleLinkedList() {

@@ -13,8 +13,7 @@ int Queue::isEmpty() {
 		cout << " Queue is empty !" << endl;
 		return 1;
 	}
-	return 0;
-		
+	return 0;	
 }
 
 int Queue::isFull() {
