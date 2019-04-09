@@ -27,6 +27,12 @@
     <ClCompile Include="Node.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="single-linked-list-queue.hpp">
+      <Filter>소스 파일\응용</Filter>
+    </ClCompile>
+    <ClCompile Include="single-linked-list.hpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="single_linked_list.h">
@@ -34,9 +40,6 @@
     </ClInclude>
     <ClInclude Include="Node.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="single-linked-list.hpp">
-      <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="single-linked-list-stack.hpp">
       <Filter>소스 파일\응용</Filter>

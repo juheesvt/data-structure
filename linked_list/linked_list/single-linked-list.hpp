@@ -13,9 +13,9 @@ private:
 	Node<T> * next;
 
 public:
-	Node<T>() {
-		data = NULL;
-		next = NULL;
+	Node<T>(T data = NULL) {
+		this->data = data;
+		this->next = NULL;
 	}
 	T getData() {
 		return this->data;
@@ -93,7 +93,7 @@ public:
 		Node<T> * node = new Node<T>();
 		node->setData(data);
 
-		if (isEmpty()) 
+		if (isEmpty())
 			head = node;
 		else {
 			Node<T> * temp = head;
@@ -101,7 +101,7 @@ public:
 			head->setNext(temp);
 		}
 		tail++;
-			
+
 	}
 
 	void append(T data) {
@@ -123,7 +123,7 @@ public:
 			}
 		}
 		tail++;
-		
+
 	}
 	void del(T data) {
 		if (!tail)
@@ -186,8 +186,8 @@ public:
 			cout << index << endl;
 		return index;
 	}
-	
-	void concatenate(Node<T>* list2head, int list2tail) { 
+
+	void concatenate(Node<T>* list2head, int list2tail) {
 		if (isEmpty()) {
 			head = list2head;
 			tail = list2tail;

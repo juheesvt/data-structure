@@ -1,21 +1,25 @@
 
-#include "single-linked-list-stack.hpp"
+#include "single-linked-list-queue.hpp"
 
 int main() {
-	SingleLinkedListStack<int> s;
+	
+	SingleLinkedListQueue<int> q;
 
-	if (s.isEmpty())
-		cout << "stack is Empty !" << endl;
-	else
-		cout << "stack isn't Empty !" << endl;
+	if (q.isEmpty())
+		cout << "Queue is Empty" << endl;
 
-	s.push(1);
-	s.push(2);
-	s.push(10);
-	s.display();
-	cout << s.pop() << endl;
-	s.display();
-
+	q.enQueue(1);
+	q.display();
+	q.enQueue(2);
+	q.display();
+	q.enQueue(3);
+	q.display();
+	cout << q.deQueue() << endl;
+	q.display();
+	q.deQueue();
+	q.deQueue();
+	q.display();
+	q.deQueue();
 
 	return 0;
 }
