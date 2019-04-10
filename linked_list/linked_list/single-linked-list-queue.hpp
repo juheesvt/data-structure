@@ -37,7 +37,7 @@ public:
 	}
 
 	T deQueue() {
-		if (size == 0)
+		if (isEmpty())
 			cout << "Queue is Empty !!";
 		else {
 			Node<T> * temp = front;
@@ -55,7 +55,7 @@ public:
 	}
 
 	void display() {
-		if (isEmpty())
+		if (size == 0)
 			cout << "Queue is Empty!!!" << endl;
 		else {
 			Node<T> * temp = front;
