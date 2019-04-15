@@ -19,6 +19,9 @@
     <Filter Include="소스 파일\Hw 02">
       <UniqueIdentifier>{616543ef-d24d-4b2b-b219-6ae5925709cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Hw 03">
+      <UniqueIdentifier>{b4c76931-ecd5-4185-bf66-9b238623c5db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="hw01-2.cpp">
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="hw02.cpp">
       <Filter>소스 파일\Hw 02</Filter>
+    </ClCompile>
+    <ClCompile Include="hw03.cpp">
+      <Filter>소스 파일\Hw 03</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,10 +47,22 @@
     <Text Include="homework02.txt">
       <Filter>리소스 파일</Filter>
     </Text>
+    <Text Include="homework03-1.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
+    <Text Include="homework03-2.txt">
+      <Filter>리소스 파일</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stack.hpp">
       <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="singlelinkedlist.hpp">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="hw3-singlelinkedlist.hpp">
+      <Filter>소스 파일\Hw 03</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
 template <typename T>
 class SingleLinkedListQueue {
 private:
-	int size;
+	SingleLinkedList<T> queue;
 	Node<T> * front;
 	Node<T> * rear;
 
@@ -13,13 +13,15 @@ public:
 	SingleLinkedListQueue() {
 		front = NULL;
 		rear = NULL;
-		size = 0;
+	}
+
+	SingleLinkedList<T> getQueue() {
+		return this->queue;
 	}
 	
 	int isEmpty() {
-		if (front == NULL) {
+		if (front == NULL) 
 			return true;
-		}
 		return false;
 	}
 
@@ -28,34 +30,35 @@ public:
 		if (isEmpty()) {
 			front = temp;
 			rear = temp;
+			queue.setHead(front);
 		}
 		else {
 			rear->setNext(temp);
 			rear = temp;
 		}
-		size++;
 	}
 
 	T deQueue() {
-		if (isEmpty())
+		if (isEmpty()) 
 			cout << "Queue is Empty !!";
+
 		else {
 			Node<T> * temp = front;
 			T value = temp->getData();
 
 			front = front->getNext();
+			queue.setHead(front);
 
 			if (front == NULL)
 				rear = NULL;
 			delete temp;
-			size--;
-			
+		
 			return value;
 		}
 	}
 
 	void display() {
-		if (size == 0)
+		if (isEmpty())
 			cout << "Queue is Empty!!!" << endl;
 		else {
 			Node<T> * temp = front;

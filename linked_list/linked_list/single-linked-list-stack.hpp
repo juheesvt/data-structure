@@ -9,27 +9,39 @@ class SingleLinkedListStack {
 private:
 	SingleLinkedList<T> stack;
 	int top;
-	T topData;
-	
+
 public:
 	SingleLinkedListStack<T>() {
 		top = -1;
 	}
+	SingleLinkedList<T> getStack() {
+		return this->stack;
+	}
 
-	int isEmpty() {
+	int stackIsEmpty() {
 		if (top == -1)
 			return 1;
 		return 0;
 	}
 	void push(T data) {
-		stack.push(data);
+		Node<T> * node = new Node<T>(data);
+		if (stackIsEmpty()) {
+			stack.setHead(node);
+		}
+		else {
+			Node<T> *temp = stack.getHead();
+			stack.setHead(node);
+			node->setNext(temp);
+		}
 		top++;
 	}
 	T pop() {
 		Node<T> *temp = stack.getHead();
+		T popData = temp->getData();
 		stack.setHead((stack.getHead())->getNext());
-		stack.setTail(--top);
-		return temp->getData();
+		top--;
+		delete temp;
+		return popData;
 	}
 	void display() {
 		stack.display();

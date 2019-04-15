@@ -1,6 +1,7 @@
 #ifndef SingleLINKEDLIST_HPP
 #define SingleLINKEDLIST_HPP
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -37,11 +38,13 @@ class SingleLinkedList {
 
 private:
 	Node<T> * head;
+	Node<T>* rear;
 	int tail;
 public:
 
 	SingleLinkedList() {
 		head = NULL;
+		rear = NULL;
 		tail = 0;
 	}
 
@@ -88,8 +91,6 @@ public:
 		tail += 1;
 	}
 
-	
-
 	void append(T data) {
 
 		Node<T> * node = new Node<T>();
@@ -113,7 +114,7 @@ public:
 	}
 	void del(T data) {
 		if (!tail)
-			cout << "not found" << endl;
+			cout << "SingleLinkedList is Empty !!" << endl;
 
 		else {
 			Node<T> * pre_target_node = NULL;
@@ -173,30 +174,6 @@ public:
 		return index;
 	}
 
-	int find(int n) {
-		if (isEmpty())
-			return -1;
-		Node<T> * temp = head;
-		for (int i = 0; i < n; i++) {
-			if (temp == NULL)
-				return -1;
-			temp = temp->getNext();
-		}
-		return n;
-	}
-
-	void displayLast() {
-		if (isEmpty())
-			cout << "list is Empty!!" << endl;
-		else {
-			Node<T> * temp = head;
-			for (; temp->getNext() != NULL; temp = temp->getNext());
-			cout << temp->getData()<<endl;
-
-
-		}
-	}
-
 	void concatenate(Node<T>* list2head, int list2tail) {
 		if (isEmpty()) {
 			head = list2head;
@@ -214,6 +191,11 @@ public:
 		}
 	}
 
+	void sortConcatenate(Node<T> * list2head, int list2tail) {
+		Node<T> * temp = head;
+
+	}
+
 	void reverse() {
 		Node<T> * middle, *trail;
 		middle = NULL;
@@ -226,6 +208,80 @@ public:
 		}
 		head = middle;
 	}
+	// stack 함수
+	void push(T data) {
+		Node<T> * node = new Node<T>();
+		node->setData(data);
+
+		if (isEmpty())
+			head = node;
+		else {
+			Node<T> * temp = head;
+			head = node;
+			head->setNext(temp);
+		}
+		tail++;
+
+	}
+
+	T pop() {
+		Node<T> * popNode = head;
+		T popData = popNode->getData();
+		head = head->getNext();
+		delete popNode;
+		tail--;
+		return popData;
+	}
+
+	//queue 함수
+
+
+	void enQueue(T data) {
+		Node<T> * temp = new Node<T>(data);
+		if (isEmpty()) {
+
+			head = temp;
+			rear = temp;
+		}
+		else {
+			rear->setNext(temp);
+			rear = temp;
+		}
+		tail++;
+	}
+
+	T deQueue() {
+		if (isEmpty()) {
+			cout << "Queue is Empty !!" << endl;
+		}
+		else {
+			Node<T> * temp = head;
+			T value = temp->getData();
+
+			head = head->getNext();
+
+			if (head == NULL)
+				rear = NULL;
+			delete temp;
+			tail--;
+
+			return value;
+		}
+	}
+
+	Node<T> * getHead() {
+		return this->head;
+	}
+
+	void setHead(Node<T> * head) {
+		this->head = head;
+	}
+
+	void setTail(int top) {
+		this->tail = top + 1;
+	}
+
+
 
 	~SingleLinkedList() {
 		if (!isEmpty()) {

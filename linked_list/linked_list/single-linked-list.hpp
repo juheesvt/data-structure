@@ -1,7 +1,7 @@
 #ifndef SingleLINKEDLIST_HPP
 #define SingleLINKEDLIST_HPP
 #include <iostream>
-#include <string>
+
 
 using namespace std;
 
@@ -38,12 +38,19 @@ class SingleLinkedList {
 
 private:
 	Node<T> * head;
-	int tail;
+
 public:
 
 	SingleLinkedList() {
 		head = NULL;
-		tail = 0;
+	}
+
+	Node<T> * getHead() {
+		return this->head;
+	}
+
+	void setHead(Node<T> * head) {
+		this->head = head;
 	}
 
 	bool isEmpty() {
@@ -86,22 +93,6 @@ public:
 				}
 			}
 		}
-		tail += 1;
-	}
-
-	void push(T data) {
-		Node<T> * node = new Node<T>();
-		node->setData(data);
-
-		if (isEmpty())
-			head = node;
-		else {
-			Node<T> * temp = head;
-			head = node;
-			head->setNext(temp);
-		}
-		tail++;
-
 	}
 
 	void append(T data) {
@@ -122,11 +113,9 @@ public:
 				}
 			}
 		}
-		tail++;
-
 	}
 	void del(T data) {
-		if (!tail)
+		if (isEmpty())
 			cout << "SingleLinkedList is Empty !!" << endl;
 
 		else {
@@ -144,7 +133,6 @@ public:
 						head = target_node->getNext();
 
 					delete target_node;
-					tail -= 1;
 					break;
 				}
 				if (target_node != head && target_node->getNext() == NULL)
@@ -154,15 +142,13 @@ public:
 				cout << data << "가 list안에 없습니다." << endl;
 		}
 	}
-	int size() {
-		return tail;
-	}
+
 	void display() {
 		if (isEmpty())
 			cout << "SingleLinkedList is Empty !!" << endl;
 		else {
 			Node<T> * temp = head;
-			for (int i = 0; i < tail; ++i) {
+				while(temp) {
 				cout << temp->getData() << " ";
 				temp = temp->getNext();
 			}
@@ -172,10 +158,10 @@ public:
 	int search(T data) {
 		Node<T> * temp = head;
 		int index = -1;
-
-		for (int i = 0; i < tail; ++i) {
+		int i = 0;
+		while(temp) {
 			if (data == temp->getData()) {
-				index = i;
+				index = i++;
 				break;
 			}
 			temp = temp->getNext();
@@ -187,23 +173,60 @@ public:
 		return index;
 	}
 
-	void concatenate(Node<T>* list2head, int list2tail) {
-		if (isEmpty()) {
+	void concatenate(Node<T>* list1head, Node<T>* list2head) {
+		if (list1head == NULL)
 			head = list2head;
-			tail = list2tail;
-		}
-		else {
-			Node<T> * temp = head;
-			for (;; temp = temp->getNext()) {
-				if (temp->getNext() == NULL) {
-					temp->setNext(list2head);
-					tail += list2tail;
-					break;
-				}
+
+		else if (list2head == NULL)
+			head = list1head;
+
+		else{
+			//리스트 합치기
+			head = list1head;
+			Node<T> *temp = list1head;
+			for (; temp->getNext() != NULL; temp = temp->getNext());
+			temp->setNext(list2head);
+
+			//헤드값 ( 가장 최솟값 구하기 )
+			temp = list1head;
+			Node<T> * cmp = list1head;
+			Node<T> * sortedNode;
+
+			for (; temp->getNext() != NULL;temp = temp->getNext()) {
+				if (temp->getData() < cmp->getData())
+					cmp = temp;
 			}
+
+			//선택정렬시작
+			this->head = cmp;
+			sortedNode = head;
+			for (; sortedNode->getNext() != NULL;) {
+				Node<T> * sortTargetNode = sortedNode->getNext();
+				Node<T> * minNode = sortedNode->getNext();
+				for (; sortTargetNode != NULL; sortTargetNode = sortTargetNode->getNext()) {
+					if (sortTargetNode->getData() < minNode->getData())
+						minNode = sortTargetNode;
+				}
+				T changeData = (sortedNode->getNext())->getData();
+				(sortedNode->getNext())->setData(minNode->getData());
+				minNode->setData(changeData);
+				sortedNode = sortedNode->getNext();
+				
+			}
+		
 		}
 	}
+	int size() {
+		if (isEmpty())
+			return 0;
+		int length = 0;
+		Node<T> * temp = head;
+		for (; temp != NULL; temp = temp->getNext()) 
+			length++;
+		return length;
+	}
 
+	// 리스트 완전히 뒤집기
 	void reverse() {
 		Node<T> * middle, *trail;
 		middle = NULL;
@@ -217,28 +240,17 @@ public:
 		head = middle;
 	}
 
-	Node<T> * getHead() {
-		return this->head;
-	}
-
-	void setHead(Node<T> * head) {
-		this->head = head;
-	}
-
-	void setTail(int top) {
-		this->tail = top + 1;
-	}
-
-
-
 	~SingleLinkedList() {
-		if (!isEmpty()) {
+		if (!isEmpty() || this->head->getData() < 0) {
 
 			Node<T> * del_node = head;
 			Node<T> * next_del_node = head->getNext();
 
 			for (int i = 0; ; ++i) {
-
+				if (next_del_node == NULL) {	// 리스트안에 데이터가 하나만 있을 때
+					delete del_node;
+					break;
+				}
 				if (next_del_node->getNext() == NULL) {
 					delete del_node;
 					delete next_del_node;

@@ -1,25 +1,21 @@
 
 #include "single-linked-list-queue.hpp"
+#include "single-linked-list-stack.hpp"
 
 int main() {
 	
-	SingleLinkedListQueue<int> q;
+	SingleLinkedListQueue<char> q;
+	SingleLinkedListStack<char> s;
+	SingleLinkedList<char> sll;
 
-	if (q.isEmpty())
-		cout << "Queue is Empty" << endl;
-
-	q.enQueue(1);
+	s.push('a');
+	s.push('e');
+	s.display();
+	q.enQueue('b');
+	q.enQueue('c');
+	q.enQueue('d');
 	q.display();
-	q.enQueue(2);
-	q.display();
-	q.enQueue(3);
-	q.display();
-	cout << q.deQueue() << endl;
-	q.display();
-	q.deQueue();
-	q.deQueue();
-	q.display();
-	q.deQueue();
+	//sll.concatenate((s.getStack()).getHead(), (q.getQueue()).getHead());
 
 	return 0;
 }

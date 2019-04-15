@@ -18,6 +18,9 @@
     <ClCompile Include="lab05-SLL.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="extra.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="single-linked-list.hpp">
