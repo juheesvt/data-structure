@@ -101,7 +101,7 @@ public:
 				head = newNode;
 				newNode->setNext(temp);
 			}
-			else {
+			else { 
 				for (int i = 0;; i++) {
 					// 리스트에 노드 하나만 있는데 헤드의 name값 보다 클 경우
 					if (temp != NULL && temp->getNext() == NULL) {
@@ -181,7 +181,7 @@ public:
 			Node * temp = head;
 			Node * linkNode = list2head->getNext();
 
-			for (; linkNode != NULL; linkNode = linkNode->getNext()) {
+			for (; linkNode != NULL; linkNode = linkNode->getNext(), temp = temp->getNext()) {
 				temp->setNext(new Node(linkNode->getName(), linkNode->getId(), linkNode->getGrade(), linkNode->getMajor()));
 			}
 		}
@@ -192,7 +192,7 @@ public:
 			Node * temp = head;
 			Node * linkNode = list1head->getNext();
 
-			for (; linkNode != NULL; linkNode = linkNode->getNext()) {
+			for (; linkNode != NULL; linkNode = linkNode->getNext(), temp = temp->getNext()) {
 				temp->setNext(new Node(linkNode->getName(), linkNode->getId(), linkNode->getGrade(), linkNode->getMajor()));
 			}
 		}
