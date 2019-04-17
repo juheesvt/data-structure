@@ -44,5 +44,8 @@
     <ClInclude Include="single-linked-list-stack.hpp">
       <Filter>소스 파일\응용</Filter>
     </ClInclude>
+    <ClInclude Include="double-linked-list.hpp">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

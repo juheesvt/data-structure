@@ -1,21 +1,27 @@
 
-#include "single-linked-list-queue.hpp"
-#include "single-linked-list-stack.hpp"
+#include "double-linked-list.hpp"
+
 
 int main() {
-	
-	SingleLinkedListQueue<char> q;
-	SingleLinkedListStack<char> s;
-	SingleLinkedList<char> sll;
+	DoubleLinkedList<int> d;
 
-	s.push('a');
-	s.push('e');
-	s.display();
-	q.enQueue('b');
-	q.enQueue('c');
-	q.enQueue('d');
-	q.display();
-	//sll.concatenate((s.getStack()).getHead(), (q.getQueue()).getHead());
+	d.insert(20);
+	d.insert(10);
+	d.insert(30);
+	d.displayForward();
+
+	d.insertAfter(2, 40);
+	d.displayForward();
+
+	d.insertBefore(3, 50);
+	d.displayForward();
+
+	d.delIndex(5);
+	d.displayForward();
+
+	d.displayBackward();
+
+	
 
 	return 0;
 }
