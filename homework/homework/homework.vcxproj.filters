@@ -58,11 +58,11 @@
     <ClInclude Include="stack.hpp">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="singlelinkedlist.hpp">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="hw3-singlelinkedlist.hpp">
       <Filter>소스 파일\Hw 03</Filter>
+    </ClInclude>
+    <ClInclude Include=".hpp">
+      <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

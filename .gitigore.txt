@@ -5,6 +5,7 @@
 .vs/
 Debug/
 *.vcxproj.user
+*.vcxproj.filters
 *.suo
 *.db
 *.pdb

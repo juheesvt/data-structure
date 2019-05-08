@@ -50,8 +50,6 @@ int print(char parentheses[]) {
 				char temp = s.pop();
 				if (! match(temp, parentheses[i]))
 					return -1;		// mismatch
-				
-
 			}
 		}
 	}

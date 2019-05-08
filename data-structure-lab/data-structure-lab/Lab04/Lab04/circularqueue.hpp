@@ -29,27 +29,21 @@ Stack <char> s;
 int main() {
 	
 
-	s.push('a');
 	q.enQueue('b');
 	q.enQueue('c');
 	q.enQueue('d');
-	s.push('e');
 
-	s.push('F');
+
 	q.enQueue('G');
-
-	s.display();
 
 	q.printQueue();
 
 	cout << "Output :";
-	cout << s.pop() << " ";
-	cout << q.deQueue() << " ";
-	cout << q.deQueue() << " ";
-	cout << q.deQueue() << " ";
-	cout<< s.pop() << endl;
 
-	s.pop();
+	cout << q.deQueue() << " ";
+	cout << q.deQueue() << " ";
+	cout << q.deQueue() << " ";
+
 	q.deQueue();
 
 	
@@ -73,21 +67,17 @@ int main() {
 
 Queue::Queue(int size) : size(3) {
 	qarray = new char[size]();
-	front = -1;
-	rear = -1;
+	front = 0;
+	rear = 0;
 }
 void Queue::enQueue(char value) {
-	rear = ((rear+1) % size);
+	rear = (rear) % size+1;
 	if (isFull()) {
-		rear--;
-		if (rear < 0) {
-			rear = 0;
-		}
-		cout << "Queue is Full		" << endl;
+		cout << "Queue is Full" << endl;
+		return;
 	}
-	else {
-		qarray[rear] = value;
-	}
+	qarray[rear] = value;
+
 }
 
 
@@ -96,30 +86,24 @@ char Queue::deQueue() {
 		cout << "Queue is Empty" << endl;
 	}
 	else {
-		front = (front +1) % size;
+		front = (front ) % size);
 		return qarray[front];
 	}
 }
 bool Queue::isFull() {
-	if (rear == front)
-		return true;
-	else
-		return false;
+	return rear == front;
 }
 bool Queue::isEmpty() {
-	if (front == rear)
-		return true;
-	else
-		return false;
+	return rear == front;
 }
 void Queue::printQueue() {
 	if (isEmpty())
 		cout << "Queue is Empty" << endl;
 	else {
 		cout << "Queue : ";
-		int i = (front + 1) % (size);
+		int i = (front + 1) % size;
 		while (true) {
-			cout << qarray[i-1] << " ";
+			cout << qarray[i] << " ";
 			if (i == rear)
 				break;
 			i = (i + 1) % size;
