@@ -45,7 +45,7 @@ public:
 	int isEmpty() {
 		return root == NULL;
 	}
-	Node * search(int target) {
+	int search(int target) {
 		if (isEmpty()) {
 			cout << "Tree is Empty !!" << endl;
 			return NULL;
@@ -53,7 +53,7 @@ public:
 		Node* temp = root;
 		for (; temp != NULL;) {
 			if (temp->getData() == target)
-				return temp;
+				return target;
 			else if (target < temp->getData()) {
 				temp = temp->getLeft();
 				continue;
@@ -84,23 +84,29 @@ public:
 			return ptr;
 		findMin(ptr->getLeft());
 	}
-	Node* del(Node * ptr,int data) {
+	Node* del(Node * ptr,int data = 0) {
 		if (!isEmpty()) {
 			if (data < ptr->getData())
 				ptr->setLeft(del(ptr->getLeft(), data));
 			else if (data > ptr->getData())
 				ptr->setRight(del(ptr->getRight(), data));
 			else if (ptr->getLeft() == NULL && ptr->getRight() == NULL) { // leaf node
+				if (ptr == root)
+					root = NULL;
 				ptr = NULL;
 			}
 			else if (ptr->getLeft() == NULL) {
 				Node * temp = ptr;
 				ptr = ptr->getRight();
+				if (temp == root)
+					root = ptr;
 				delete temp;
 			}
 			else if (ptr->getRight() == NULL) {
 				Node * temp = ptr;
 				ptr = ptr->getLeft();
+				if (temp == root)
+					root = ptr;
 				delete temp;
 			}
 			else {
@@ -124,16 +130,64 @@ public:
 				cout << "   ";
 			cout << ptr->getData();
 			if (ptr->getLeft() != NULL && ptr->getRight() != NULL)
-				cout << "  < " << endl;
+				cout << "< " << endl;
 			else if (ptr->getRight() != NULL)
-				cout << " / " << endl;
+				cout << "¢Ö " << endl;
 			else if (ptr->getLeft() != NULL)
-				cout << "  \    " << endl;
+				cout << "¢Ù " << endl;
 			else
 				cout << endl;
 			display(ptr->getLeft(), level + 1);
 		}
 		
+	}
+
+	int leaf(Node *p) {
+		if (p == NULL) {
+			return 0;
+		}
+		if (p->getLeft() == NULL && p->getRight() == NULL)
+			return 1;
+		else
+			return leaf(p->getLeft()) + leaf(p->getRight());
+	}
+
+	void Traverse(Node * ptr) {
+		if (isEmpty()) {
+			cout << "Tree is Empty" << endl;
+			return;
+		}
+
+		inOrder(root); preOrder(root);  postOrder(root);
+	}
+
+	void inOrder(Node * ptr) {
+		if (ptr) {
+			inOrder(ptr->getLeft());
+			cout << ptr->getData();
+			inOrder(ptr->getRight());
+		}
+	}
+
+	void postOrder(Node * ptr) {
+		if (ptr) {
+			postOrder(ptr->getLeft());
+			postOrder(ptr->getRight());
+			cout << ptr->getData();
+		}
+	}
+
+	void preOrder(Node * ptr) {
+		if (ptr) {
+			cout << ptr->getData();
+			preOrder(ptr->getLeft());
+			preOrder(ptr->getRight());
+		}
+	}
+
+	void Delete() {
+		if (isEmpty())
+			cout << "Tree is Empty" << endl;
 	}
 
 

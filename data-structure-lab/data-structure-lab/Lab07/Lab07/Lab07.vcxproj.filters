@@ -24,6 +24,9 @@
     <ClCompile Include="tree-build.hpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="lab08.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">

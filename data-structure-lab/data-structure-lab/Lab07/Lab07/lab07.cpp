@@ -36,6 +36,8 @@ int main() {
 
 		cout << endl;
 		cout << endl;
+
+		t.draw(t.getroot(), 1);
 	}
 
 }

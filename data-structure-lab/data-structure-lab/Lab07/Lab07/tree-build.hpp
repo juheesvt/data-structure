@@ -171,5 +171,24 @@ public:
 		}
 	}
 
+	void draw(Node* ptr, int level) {
+		if (ptr != NULL && level <= 7) {
+			draw(ptr->getRight(), level + 1);
+			for (int i = 1; i <= level - 1; i++)
+				cout << "   ";
+			cout << ptr->getData();
+			if (ptr->getLeft() != NULL && ptr->getRight() != NULL)
+				cout << "< " << endl;
+			else if (ptr->getRight() != NULL)
+				cout << "¢Ö " << endl;
+			else if (ptr->getLeft() != NULL)
+				cout << "¢Ù " << endl;
+			else
+				cout << endl;
+			draw(ptr->getLeft(), level + 1);
+		}
+
+	}
+
 
 };
